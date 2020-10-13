@@ -2,12 +2,19 @@ class Domino():
 	def __init__(self, isTrump, isDouble, High, Low, ID, Points):
 		self.isTrump = isTrump    # Value to see if a trump
 		self.isDouble = isDouble  # Value to test for a double
-		self.High = High          # The large side of the dominoe
-		self.Low = Low            # The small side of the dominoe
-		self.ID = ID              # The ID representing domonies in an order
-		self.Points = Points      # The value of the dominoe when adding for tricks
+		self.High = High          # The large side of the domino
+		self.Low = Low            # The small side of the domino
+		self.ID = ID              # The ID representing domonis in an order
+		self.Points = Points      # The value of the domino when adding for tricks
 	def printDom(self):
 		print("[" + str(self.High) + "/" + str(self.Low) + "]")
+	def trumpCheck(self, Trump):
+			if self.High == Trump:
+				self.isTrump = True
+			elif self.Low == Trump:
+				self.isTrump = True
+			else :
+				self.isTrump = False
 
 D0 = Domino(False, True, 0, 0, 0, .25)
 D1 = Domino(False, False, 1, 0, 0, .25)
@@ -40,8 +47,21 @@ D27 = Domino(False, True, 6, 6, 0, .25)
 
 Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27]
 
+Trump = 1
+
+Player1 = [D0, D1, D2, D3, D4, D5, D6]
+Player2 = [D7, D8, D9, D10, D11, D12, D13]
+Player3 = [D14, D15, D16, D17, D18, D19, D20]
+Player4 = [D21, D22, D23, D24, D25, D26, D27]
+
+
+#Check for Trumps
 for Domino in Dominos:
-	Domino.printDom()
+	Domino.trumpCheck(Trump)
+print("Trump check done")
+
+
+
 
 
 #print(D0.High)
