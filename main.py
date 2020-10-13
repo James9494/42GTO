@@ -7,7 +7,7 @@ class Domino():
 		self.ID = ID              # The ID representing domonies in an order
 		self.Points = Points      # The value of the dominoe when adding for tricks
 	def printDom(self):
-		print("[" + self.High + "/" + self.Low + "]")
+		print("[" + str(self.High) + "/" + str(self.Low) + "]")
 D0 = Domino(False, True, 0, 0 ,0, .25)
 print(D0.High)
 D0.printDom()
