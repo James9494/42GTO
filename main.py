@@ -16,6 +16,83 @@ class Domino():
 				self.isTrump = True
 			else :
 				self.isTrump = False
+				
+def CreateHand(suit, hand):
+	AmountOf = 0
+	temp = 0
+	for i in range(len(hand)):
+		if hand[i].High == suit or hand[i].Low == suit:
+			AmountOf += 1
+	if AmountOf == 0:
+		tempArray = [D0] * (len(hand) - hand.count(D99))
+		for i in range(len(hand)):
+			tempArray[i] = hand[i]
+	else:
+		tempArray = [D0] * AmountOf
+		for i in range(AmountOf):
+			if hand[i].High == suit or hand[i].Low == suit:
+				tempArray[temp] = hand[i]
+				temp +=1
+#	print(str(len(tempArray)))
+	return tempArray
+	
+def Score(d0, d1, d2, d3, trump):
+	if d0.Low == trump and d0.High == trump:
+		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
+		Won0()
+	elif d2.Low == trump and d2.High == trump:
+		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
+	elif d1.Low == trump and d1.High == trump:
+		PS[4] = 0
+	elif d3.Low == trump and d3.High == trump:
+		PS[4] = 0
+	elif d0.Low == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
+		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
+		Won0()
+	
+def Won0():
+	
+	for a in range(len(Player0)):
+		if Player0[a] == D99:
+			continue
+		if len(Player0) == 0:
+			break
+		if Player0[a].High == Trump or Player0[a].Low == Trump:
+			Suit = Trump
+		else:
+			Suit = Player0[a].High
+	
+		Playable0 = CreateHand(Suit, Player0)
+		Playable1 = CreateHand(Suit, Player1)
+		Playable2 = CreateHand(Suit, Player2)
+		Playable3 = CreateHand(Suit, Player3)
+#		print(str(len(Playable1)))
+	
+		for b in range(len(Playable1)):
+			for c in range(len(Playable2)):
+				for d in range(len(Playable3)):
+					Play0 = Player0[a]
+					Play1 = Playable1[b]
+					Play2 = Playable2[c]
+					Play3 = Playable3[d]
+					Player0[a] = D99
+					Playable1[b] = D99
+					Playable2[c] = D99
+					Playable3[d] = D99
+					Score(Play0, Play1, Play2, Play3, Trump)
+
+def Won1():
+	i = 0
+	
+def Won2():
+	i = 0	
+	
+def Won3():
+	i = 0
+	
+	
+	
+	
 
 D0 = Domino(False, True, 0, 0, 0, .25)
 D1 = Domino(False, False, 1, 0, 1, .25)
@@ -45,12 +122,15 @@ D24 = Domino(False, False, 6, 4, 24, 10.25)
 D25 = Domino(False, True, 5, 5, 25, 10.25)
 D26 = Domino(False, False, 6, 5, 26, .25)
 D27 = Domino(False, True, 6, 6, 27, .25)
+D99 = Domino(False, False, 99, 99, 99, 0)
 
 Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27]
 
 Suit = 0
 
-Trump = 2
+Trump = 6
+
+cnt = 0
 
 P0 = 0.0
 P1 = 0.0
@@ -61,6 +141,9 @@ Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  3/6  1/6  1/1  0/2  
 Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  4/6
 Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
 Player3 = [D4, D5, D9, D13, D16, D17, D19]       #0/4  0/5  1/3  2/5  2/2  2/6  3/4
+
+
+
 Player = [Player0, Player1, Player2, Player3]
 
 #Player Scores
@@ -76,95 +159,38 @@ Play3 = D0
 for Domino in Dominos:
 	Domino.trumpCheck(Trump)
 print("Trump check done")
-
-
-#Player Picks Trump (TODO)
-
-#Player 0 Picks First Domino
-for a in range(7):
-	Suit = Player0[a].High
-	Play0 = Player0[a]
-
-#Player 1 picks
-	for b in range(7):
-		if Player1[b].High == Suit or Player1[b].Low == Suit:
-			if Player1[b].isPlayed == False:
-				Play1 = Player1[b]
-				Player1[b].isPlayed = True
-				break
-			else:
-				continue
-		elif Player1[b].isPlayed == False:
-			Play1 = Player1[b]
-			Player1[b].isPlayed = True
-			break
-		else:
-			continue
-
-#Player 2 Picks				
-	for b in range(7):
-		if Player2[b].High == Suit or Player2[b].Low == Suit:
-			if Player2[b].isPlayed == False:
-				Play2 = Player2[b]
-				Player2[b].isPlayed = True
-				break
-			else:
-				continue
-		elif Player2[b].isPlayed == False:
-			Play2 = Player2[b]
-			Player2[b].isPlayed = True
-			break
-		else:
-			continue
-			
-#Player 3 Picks
-	for b in range(7):
-		if Player3[b].High == Suit or Player3[b].Low == Suit:
-			if Player3[b].isPlayed == False:
-				Play3 = Player3[b]
-				Player3[b].isPlayed = True
-				break
-			else:
-				continue
-		elif Player3[b].isPlayed == False:
-			Play3 = Player3[b]
-			Player3[b].isPlayed = True
-			break
-		else:
-			continue
 	
+for a in range(len(Player0)):
+	if Player0[a].High == Trump or Player0[a].Low == Trump:
+		Suit = Trump
+	else:
+		Suit = Player0[a].High
 	
-#Score first round	
-	if Play0.High == Trump and Play0.Low == Trump:
-		PS[0] += Play0.Points
-		PS[2] += Play2.Points
-	elif Play1.High == Trump and Play1.Low == Trump:
-		PS[1] += Play1.Points
-		PS[3] += Play3.Points
-	elif Play2.High == Trump and Play2.Low == Trump:
-		PS[2] += Play2.Points
-		PS[0] += Play0.Points
-	elif Play3.High == Trump and Play3.Low == Trump:
-		PS[2] += Play3.Points
-		PS[0] += Play1.Points
+	Playable0 = CreateHand(Suit, Player0)
+	Playable1 = CreateHand(Suit, Player1)
+	Playable2 = CreateHand(Suit, Player2)
+	Playable3 = CreateHand(Suit, Player3)
+#	print(str(len(Playable1)))
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	for b in range(len(Playable1)):
+		for c in range(len(Playable2)):
+			for d in range(len(Playable3)):
+				Play0 = Player0[a]
+				Play1 = Playable1[b]
+				Play2 = Playable2[c]
+				Play3 = Playable3[d]
+				Player0[a] = D99
+				Playable1[b] = D99
+				Playable2[c] = D99
+				Playable3[d] = D99
+				Score(Play0, Play1, Play2, Play3, Trump)
 	
 	
 	
 	
 
 
-
+#ps0 = team 1 ps1 = team 2
 
 print(str(PS[0]) + " " + str(PS[1]) + " " + str(PS[2]) + " " + str(PS[3]))
 
