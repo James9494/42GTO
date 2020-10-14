@@ -57,11 +57,10 @@ P1 = 0.0
 P2 = 0.0
 P3 = 0.0
 
-Player0 = [D0, D1, D2, D3, D4, D5, D6]
-Player1 = [D7, D8, D9, D10, D11, D12, D13]
-Player2 = [D14, D15, D16, D17, D18, D19, D20]
-Player3 = [D21, D22, D23, D24, D25, D26, D27]
-
+Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  3/6  1/6  1/1  0/2  0/3
+Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  4/6
+Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
+Player3 = [D4, D5, D9, D13, D16, D17, D19]       #0/4  0/5  1/3  2/5  2/2  2/6  3/4
 Player = [Player0, Player1, Player2, Player3]
 
 #Player Scores
@@ -81,7 +80,7 @@ print("Trump check done")
 
 #Player Picks Trump (TODO)
 
-#Player Picks First Domino
+#Player 0 Picks First Domino
 for a in range(7):
 	Suit = Player0[a].High
 	Play0 = Player0[a]
