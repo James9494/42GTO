@@ -40,16 +40,35 @@ def Score(d0, d1, d2, d3, trump):
 	if d0.Low == trump and d0.High == trump:
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
 		Won0()
+	elif d1.Low == trump and d1.High == trump:
+		Won1()
 	elif d2.Low == trump and d2.High == trump:
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-	elif d1.Low == trump and d1.High == trump:
-		PS[4] = 0
+		Won2()
 	elif d3.Low == trump and d3.High == trump:
-		PS[4] = 0
+		Won3()
 	elif d0.Low == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
 		Won0()
-	
+	elif d0.High == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
+		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
+		Won0()
+	elif d1.Low == trump and d0.High != trump and d0.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
+		Won1()
+	elif d1.High == trump and d0.High != trump and d0.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
+		Won1()
+	elif d2.Low == trump and d1.High != trump and d1.Low != trump and d0.High != trump and d0.Low != trump and d3.High != trump and d3.Low != trump:
+		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
+		Won2()
+	elif d2.High == trump and d1.High != trump and d1.Low != trump and d0.High != trump and d0.Low != trump and d3.High != trump and d3.Low != trump:
+		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
+		Won2()
+	elif d3.low == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d0.High != trump and d0.Low != trump:
+		Won3()
+	elif d3.High == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d0.High != trump and d0.Low != trump:
+		Won3()
+
+
 def Won0():
 	
 	for a in range(len(Player0)):
@@ -129,8 +148,6 @@ Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15,
 Suit = 0
 
 Trump = 6
-
-cnt = 0
 
 P0 = 0.0
 P1 = 0.0
