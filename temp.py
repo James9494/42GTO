@@ -21,4 +21,5 @@ def CreateHand(suit, hand):
 		if hand[i].High == Suit or hand[i].Low == suit:
 			tempArray[temp] = hand[i]
 			temp +=1
-	
+Date 10/13/20
+************************************************************************************************************************
