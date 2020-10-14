@@ -2,7 +2,7 @@ create any function here you want to send while not messing with main.py
 
 HandCreation Function     *** Based on the lead domino
 Use ^^^ function above to create each hand at each phase of game
-
+need to know winning path and potential the indices at that point to re create when "going back"
 
 def CreateHand(suit, hand):
 	AmountOf = 0
