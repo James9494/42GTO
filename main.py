@@ -17,56 +17,56 @@ class Domino():
 			else :
 				self.isTrump = False
 				
-def CreateHand(suit, hand):
+def createHand(suit, hand):
 	AmountOf = 0
 	temp = 0
 	for i in range(len(hand)):
 		if hand[i].High == suit or hand[i].Low == suit:
-			AmountOf += 1
-	if AmountOf == 0:
+			amountOf += 1
+	if amountOf == 0:
 		tempArray = [D0] * (len(hand) - hand.count(D99))
 		for i in range(len(hand)):
 			tempArray[i] = hand[i]
 	else:
-		tempArray = [D0] * AmountOf
-		for i in range(AmountOf):
+		tempArray = [D0] * amountOf
+		for i in range(amountOf):
 			if hand[i].High == suit or hand[i].Low == suit:
 				tempArray[temp] = hand[i]
 				temp +=1
 #	print(str(len(tempArray)))
 	return tempArray
 	
-def Score(d0, d1, d2, d3, trump):
-	if d0.Low == trump and d0.High == trump:
+def handWinner(d0, d1, d2, d3, trump):
+	if d0.Low == trump and d0.High == trump:   #if trump and a double always wins
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		Won0()
-	elif d1.Low == trump and d1.High == trump:
-		Won1()
-	elif d2.Low == trump and d2.High == trump:
+		#Won0()
+	elif d1.Low == trump and d1.High == trump:  #if trump and a double always wins
+		#Won1()
+	elif d2.Low == trump and d2.High == trump:  #if trump and a double always wins
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		Won2()
-	elif d3.Low == trump and d3.High == trump:
-		Won3()
+		#Won2()
+	elif d3.Low == trump and d3.High == trump:  #if trump and a double always wins
+		#Won3()
 	elif d0.Low == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		Won0()
+		#Won0()
 	elif d0.High == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		Won0()
+		#Won0()
 	elif d1.Low == trump and d0.High != trump and d0.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
-		Won1()
+		#Won1()
 	elif d1.High == trump and d0.High != trump and d0.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
-		Won1()
+		#Won1()
 	elif d2.Low == trump and d1.High != trump and d1.Low != trump and d0.High != trump and d0.Low != trump and d3.High != trump and d3.Low != trump:
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		Won2()
+		#Won2()
 	elif d2.High == trump and d1.High != trump and d1.Low != trump and d0.High != trump and d0.Low != trump and d3.High != trump and d3.Low != trump:
 		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		Won2()
+		#Won2()
 	elif d3.low == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d0.High != trump and d0.Low != trump:
-		Won3()
+		#Won3()
 	elif d3.High == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d0.High != trump and d0.Low != trump:
-		Won3()
+		#Won3()
 
 
 def Won0():
