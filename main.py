@@ -24,7 +24,7 @@ def createHand(suit, hand):
 		if hand[i].High == suit or hand[i].Low == suit:
 			amountOf += 1
 	if amountOf == 0:
-		tempArray = [D0] * (len(hand) - hand.count(D99))
+		tempArray = [D0] * len(hand)
 		for i in range(len(hand)):
 			tempArray[i] = hand[i]
 	else:
@@ -36,83 +36,20 @@ def createHand(suit, hand):
 #	print(str(len(tempArray)))
 	return tempArray
 	
-def handWinner(d0, d1, d2, d3, trump):
-	if d0.Low == trump and d0.High == trump:   #if trump and a double always wins
-		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		#Won0()
-	elif d1.Low == trump and d1.High == trump:  #if trump and a double always wins
-		#Won1()
-	elif d2.Low == trump and d2.High == trump:  #if trump and a double always wins
-		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		#Won2()
-	elif d3.Low == trump and d3.High == trump:  #if trump and a double always wins
-		#Won3()
-	elif d0.Low == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
-		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		#Won0()
-	elif d0.High == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
-		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		#Won0()
-	elif d1.Low == trump and d0.High != trump and d0.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
-		#Won1()
-	elif d1.High == trump and d0.High != trump and d0.Low != trump and d2.High != trump and d2.Low != trump and d3.High != trump and d3.Low != trump:
-		#Won1()
-	elif d2.Low == trump and d1.High != trump and d1.Low != trump and d0.High != trump and d0.Low != trump and d3.High != trump and d3.Low != trump:
-		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		#Won2()
-	elif d2.High == trump and d1.High != trump and d1.Low != trump and d0.High != trump and d0.Low != trump and d3.High != trump and d3.Low != trump:
-		PS[0] += d0.Points + d1.Points + d2.Points + d3.Points
-		#Won2()
-	elif d3.low == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d0.High != trump and d0.Low != trump:
-		#Won3()
-	elif d3.High == trump and d1.High != trump and d1.Low != trump and d2.High != trump and d2.Low != trump and d0.High != trump and d0.Low != trump:
-		#Won3()
-
-
-def Won0():
-	
-	for a in range(len(Player0)):
-		if Player0[a] == D99:
-			continue
-		if len(Player0) == 0:
-			break
-		if Player0[a].High == Trump or Player0[a].Low == Trump:
-			Suit = Trump
-		else:
-			Suit = Player0[a].High
-	
-		Playable0 = CreateHand(Suit, Player0)
-		Playable1 = CreateHand(Suit, Player1)
-		Playable2 = CreateHand(Suit, Player2)
-		Playable3 = CreateHand(Suit, Player3)
-#		print(str(len(Playable1)))
-	
-		for b in range(len(Playable1)):
-			for c in range(len(Playable2)):
-				for d in range(len(Playable3)):
-					Play0 = Player0[a]
-					Play1 = Playable1[b]
-					Play2 = Playable2[c]
-					Play3 = Playable3[d]
-					Player0[a] = D99
-					Playable1[b] = D99
-					Playable2[c] = D99
-					Playable3[d] = D99
-					Score(Play0, Play1, Play2, Play3, Trump)
-
-def Won1():
-	i = 0
-	
-def Won2():
-	i = 0	
-	
-def Won3():
-	i = 0
-	
-	
-	
+	#This function will return the winning domino
+def handWinner(dLead, d1, d2, d3, trump):  # dLead is the first person who is leading a DOM and the next 3 are the 3 ppl to their left in order
 	
 
+
+
+	# This function will take in 4 dominoes and a winning team and assign points correctly
+def points()
+
+
+
+	
+	
+# Creating Dominos for use later
 D0 = Domino(False, True, 0, 0, 0, .25)
 D1 = Domino(False, False, 1, 0, 1, .25)
 D2 = Domino(False, False, 2, 0, 2, .25)
@@ -141,27 +78,27 @@ D24 = Domino(False, False, 6, 4, 24, 10.25)
 D25 = Domino(False, True, 5, 5, 25, 10.25)
 D26 = Domino(False, False, 6, 5, 26, .25)
 D27 = Domino(False, True, 6, 6, 27, .25)
-D99 = Domino(False, False, 99, 99, 99, 0)
-
+# Domino array for manipulation
 Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27]
-
+#default values
 Suit = 0
-
 Trump = 6
-
+Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  3/6  1/6  1/1  0/2  0/3
+Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  4/6
+Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
+Player3 = [D4, D5, D9, D13, D16, D17, D19]       #0/4  0/5  1/3  2/5  2/2  2/6  3/4
+Player = [Player0, Player1, Player2, Player3]
+# Default Score for each player
 P0 = 0.0
 P1 = 0.0
 P2 = 0.0
 P3 = 0.0
 
-Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  3/6  1/6  1/1  0/2  0/3
-Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  4/6
-Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
-Player3 = [D4, D5, D9, D13, D16, D17, D19]       #0/4  0/5  1/3  2/5  2/2  2/6  3/4
 
 
 
-Player = [Player0, Player1, Player2, Player3]
+
+
 
 #Player Scores
 PS = [P0, P1, P2, P3]
@@ -176,33 +113,6 @@ Play3 = D0
 for Domino in Dominos:
 	Domino.trumpCheck(Trump)
 print("Trump check done")
-	
-for a in range(len(Player0)):
-	if Player0[a].High == Trump or Player0[a].Low == Trump:
-		Suit = Trump
-	else:
-		Suit = Player0[a].High
-	
-	Playable0 = CreateHand(Suit, Player0)
-	Playable1 = CreateHand(Suit, Player1)
-	Playable2 = CreateHand(Suit, Player2)
-	Playable3 = CreateHand(Suit, Player3)
-#	print(str(len(Playable1)))
-	
-	for b in range(len(Playable1)):
-		for c in range(len(Playable2)):
-			for d in range(len(Playable3)):
-				Play0 = Player0[a]
-				Play1 = Playable1[b]
-				Play2 = Playable2[c]
-				Play3 = Playable3[d]
-				Player0[a] = D99
-				Playable1[b] = D99
-				Playable2[c] = D99
-				Playable3[d] = D99
-				Score(Play0, Play1, Play2, Play3, Trump)
-	
-	
 	
 	
 
