@@ -18,7 +18,7 @@ class Domino():
 				self.isTrump = False
 				
 def createHand(suit, hand):
-	AmountOf = 0
+	amountOf = 0
 	temp = 0
 	for i in range(len(hand)):
 		if hand[i].High == suit or hand[i].Low == suit:
@@ -36,14 +36,131 @@ def createHand(suit, hand):
 #	print(str(len(tempArray)))
 	return tempArray
 	
-	#This function will return the winning domino
-def handWinner(dLead, d1, d2, d3, trump):  # dLead is the first person who is leading a DOM and the next 3 are the 3 ppl to their left in order
+	#  This function will return the winning domino
+def handWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who is leading a DOM and the next 3 are the 3 ppl to their left in order
+	#  Default values to be changed
+	winner = 99  #  this will be set to which person one, 0 - 3
+	dWinner = Domino(False,False,0,0,0,0)  #  creating a domino that will be changed later
+	leadSuit = 0
+	# Actual Code
+
+	if(dLead.isTrump):        #  Check if lead Domino is a trump
+		leadSuit = trump      #  if trump set lead domino to the trump value
+	if(not dLead.isTrump):       #  Check if not trump
+		leadSuit = dLead.High #  set the value of lead suit to the high value
 	
+	#  if double and trump
+	if(d0.isTrump and d0.isDouble):       #  if dom d0 is both trump and double it cannot lose
+		winner = 0
+		dWinner = d0
+		return winner, dWinner
+	elif(d1.isTrump and d1.isDouble):     #  if dom d1 is both trump and double it cannot lose
+		winner = 1
+		dWinner = d1
+		return winner, dWinner
+	elif(d2.isTrump and d2.isDouble):     #  if dom d2 is both trump and double it cannot lose
+		winner = 2
+		dWinner = d2
+		return winner, dWinner
+	elif(d3.isTrump and d3.isDouble):     #  if dom d3 is both trump and double it cannot lose
+		winner = 3
+		dWinner = d3
+		return winner, dWinner
+	#  if only 1 trump
+	if(d0.isTrump and not d1.isTrump and not d2.isTrump and notd3.isTrump):     #  if d0 is the only trump it wins
+		winner = 0
+		dWinner = d0
+		return winner, dWinner
+	elif(not d0.isTrump and d1.isTrump and not d2.isTrump and not d3.isTrump):   #  if d1 is the only trump it wins
+		winner = 0
+		dWinner = d0
+		return winner, dWinner
+	elif(not d0.isTrump and not d1.isTrump and d2.isTrump and not d3.isTrump):   #  if d2 is the only trump it wins
+		winner = 0
+		dWinner = d0
+		return winner, dWinner
+	elif(not d0.isTrump and not d1.isTrump and not d2.isTrump and d3.isTrump):   #  if d3 is the only trump it wins
+		winner = 0
+		dWinner = d0
+		return winner, dWinner
+	
+	#  if 2 trump (TODO)
+	if(d0.isTrump and d1.isTrump and not d2.isTrump and not d3.isTrump):  #  if d0 and d1 doms are trump compare by ID
+		if(d0.ID > d1.ID and d0.ID > d2.ID and d0.ID > d3.ID):    #  
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		if(d1.ID > d0.ID and d1.ID > d2.ID and d1.ID > d3.ID):    #  
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		if(d2.ID > d1.ID and d2.ID > d0.ID and d2.ID > d3.ID):    #  
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		if(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+		if(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+	#  if 3 trump (TODO)
+	if(d0.isTrump and d1.isTrump and d2.isTrump and d3.isTrump):  #  if 3 doms are trump compare by ID
+		if(d0.ID > d1.ID and d0.ID > d2.ID and d0.ID > d3.ID):    #  
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		if(d1.ID > d0.ID and d1.ID > d2.ID and d1.ID > d3.ID):    #  
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		if(d2.ID > d1.ID and d2.ID > d0.ID and d2.ID > d3.ID):    #  
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		if(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+	#  if 4 trump
+	if(d0.isTrump and d1.isTrump and d2.isTrump and d3.isTrump):    #  if all doms are trump compare by ID
+		if(d0.ID > d1.ID and d0.ID > d2.ID and d0.ID > d3.ID):      #  if d0 is greater than all return d0
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		elif(d1.ID > d0.ID and d1.ID > d2.ID and d1.ID > d3.ID):    #  if d1 is greater than all return d0
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		elif(d2.ID > d1.ID and d2.ID > d0.ID and d2.ID > d3.ID):    #  if d2 is greater than all return d0
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		elif(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  if d3 is greater than all return d0
+			winner = 3
+			dWinner = d3
+			return winner, dWinner	
+	#  if no trump (TODO)
+
+
+
+
+
+
+
+
+	# Return who one as an int(winner) and then what that domino was(dWinner).
+
 
 
 
 	# This function will take in 4 dominoes and a winning team and assign points correctly
-def points()
+def points(a): #  TODO
+	a = 3
+	return a
+
 
 
 
@@ -83,6 +200,7 @@ Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15,
 #default values
 Suit = 0
 Trump = 6
+i = 0  #used for loops DELETE this later
 Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  3/6  1/6  1/1  0/2  0/3
 Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  4/6
 Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
@@ -95,12 +213,7 @@ P2 = 0.0
 P3 = 0.0
 
 
-
-
-
-
-
-#Player Scores
+#Player Scores Array
 PS = [P0, P1, P2, P3]
 
 #Domino played by each player
@@ -109,17 +222,33 @@ Play1 = D0
 Play2 = D0
 Play3 = D0
 
-#Check for Trumps
+#Set Trumps
 for Domino in Dominos:
 	Domino.trumpCheck(Trump)
 print("Trump check done")
+# ****************************************************************************
+# *                                                                          *
+# *                                 MAIN                                     *
+# *                                                                          *
+# ****************************************************************************
 	
-	
+#  maybe make a main() function TODO
 
 
-#ps0 = team 1 ps1 = team 2
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#print out all scores
 print(str(PS[0]) + " " + str(PS[1]) + " " + str(PS[2]) + " " + str(PS[3]))
 
-#print(D0.High)
-#D0.printDom()
