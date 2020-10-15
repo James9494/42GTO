@@ -67,7 +67,7 @@ def handWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who 
 		dWinner = d3
 		return winner, dWinner
 	#  if only 1 trump
-	if(d0.isTrump and not d1.isTrump and not d2.isTrump and notd3.isTrump):     #  if d0 is the only trump it wins
+	if(d0.isTrump and not d1.isTrump and not d2.isTrump and not d3.isTrump):     #  if d0 is the only trump it wins
 		winner = 0
 		dWinner = d0
 		return winner, dWinner

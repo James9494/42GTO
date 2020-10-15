@@ -36,3 +36,5 @@ Testies(a,b)
 print(a)
 
 #pls
+#   Maybe make a main fucntion?
+#   
