@@ -143,9 +143,25 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 			dWinner = d3
 			return winner, dWinner
 	#  if no trump (TODO)
-	#  if no trump and lead is a double(TODO)
-
-	#  if no trump and not lead plays winning double(TODO)
+	if not d0.isTrump and not d1.isTrump and not d2.isTrump and not d3.isTrump:
+		
+	#  if no trump and anyone plays a double matching suit
+		if d0.isDouble and d0.High == dLead.High:
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		if d1.isDouble and d1.High == dLead.High:
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		if d2.isDouble and d2.High == dLead.High:
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		if d3.isDouble and d3.High == dLead.High:
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
 
 	#  if no trump and no double(TODO)
 	return winner, dWinner, points
