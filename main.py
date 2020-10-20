@@ -39,10 +39,28 @@ def createHand(suit, hand):
 	#  This function will return the winning domino
 def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who is leading a DOM and the next 3 are the 3 ppl to their left in order
 	#  Default values to be changed
+
+
 	winner = 99  #  this will be set to which person one, 0 - 3
 	dWinner = Domino(False,False,0,0,0,0)  #  creating a domino that will be changed later
 	leadSuit = 0
+	points = 0.0  # this will be changed soon to be the points per each trick and returned at end
+
+
 	# Actual Code
+
+
+	# Add points
+	points = d0.Points + d1.Points + d2.Points + d3.Points
+	
+	# set lead value
+	if(dLead.isTrump):
+		leadSuit = trump
+	else:
+		leadSuit = dLead.High
+
+
+
 
 	if(dLead.isTrump):        #  Check if lead Domino is a trump
 		leadSuit = trump      #  if trump set lead domino to the trump value
@@ -86,44 +104,113 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 	
 	#  if 2 trump (TODO)
 	if(d0.isTrump and d1.isTrump and not d2.isTrump and not d3.isTrump):  #  if d0 and d1 doms are trump compare by ID
-		if(d0.ID > d1.ID and d0.ID > d2.ID and d0.ID > d3.ID):    #  
+		if(d0.ID > d1.ID):    #  
 			winner = 0
 			dWinner = d0
 			return winner, dWinner
-		if(d1.ID > d0.ID and d1.ID > d2.ID and d1.ID > d3.ID):    #  
+		elif(d1.ID > d0.ID):    #  
 			winner = 1
 			dWinner = d1
 			return winner, dWinner
-		if(d2.ID > d1.ID and d2.ID > d0.ID and d2.ID > d3.ID):    #  
-			winner = 2
-			dWinner = d2
-			return winner, dWinner
-		if(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  
-			winner = 3
-			dWinner = d3
-			return winner, dWinner
-		if(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  
-			winner = 3
-			dWinner = d3
-			return winner, dWinner
-	#  if 3 trump (TODO)
-	if(d0.isTrump and d1.isTrump and d2.isTrump and d3.isTrump):  #  if 3 doms are trump compare by ID
-		if(d0.ID > d1.ID and d0.ID > d2.ID and d0.ID > d3.ID):    #  
+	if(d0.isTrump and not d1.isTrump and d2.isTrump and not d3.isTrump):  #  if d0 and D2 doms are trump compare by ID
+		if(d0.ID > d2.ID):    #  
 			winner = 0
 			dWinner = d0
 			return winner, dWinner
-		if(d1.ID > d0.ID and d1.ID > d2.ID and d1.ID > d3.ID):    #  
-			winner = 1
-			dWinner = d1
-			return winner, dWinner
-		if(d2.ID > d1.ID and d2.ID > d0.ID and d2.ID > d3.ID):    #  
+		elif(d2.ID > d0.ID):    #  
 			winner = 2
 			dWinner = d2
 			return winner, dWinner
-		if(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  
+	if(d0.isTrump and not d1.isTrump and not d2.isTrump and d3.isTrump):  #  if d0 and D3 doms are trump compare by ID
+		if(d0.ID > d1.ID):    #  
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		elif(d3.ID > d0.ID):    #  
 			winner = 3
 			dWinner = d3
 			return winner, dWinner
+	if(not d0.isTrump and d1.isTrump and d2.isTrump and not d3.isTrump):  #  if d1 and D2 doms are trump compare by ID
+		if(d1.ID > d2.ID):    #  
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		elif(d2.ID > d1.ID):    #  
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+	if(not d0.isTrump and d1.isTrump and not d2.isTrump and d3.isTrump):  #  if d1 and D3 doms are trump compare by ID
+		if(d1.ID > d3.ID):    #  
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		elif(d3.ID > d1.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+	if(not d0.isTrump and not d1.isTrump and d2.isTrump and d3.isTrump):  #  if d2 and D3 doms are trump compare by ID
+		if(d2.ID > d3.ID):    #  
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		elif(d3.ID > d2.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+	#  if 3 trump
+	if(d0.isTrump and d1.isTrump and d2.isTrump and not d3.isTrump):  #  if d0 and d1 and d2 are trump
+		if(d0.ID > d1.ID and d0.ID > d2.ID):    #  
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		elif(d1.ID > d0.ID and d1.ID > d2.ID):    #  
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		elif(d2.ID > d1.ID and d2.ID > d0.ID):    #  
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+	if(d0.isTrump and d1.isTrump and not d2.isTrump and d3.isTrump):  #  if d0 and d1 and d3 are trump
+		if(d0.ID > d1.ID and d0.ID > d2.ID):    #  
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		elif(d1.ID > d0.ID and d1.ID > d2.ID):    #  
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		elif(d2.ID > d1.ID and d2.ID > d0.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+	if(d0.isTrump and not d1.isTrump and d2.isTrump and d3.isTrump):  #  if d0 and d2 and d3 are trump
+		elif(d0.ID > d1.ID and d0.ID > d2.ID):    #  
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		elif(d1.ID > d0.ID and d1.ID > d2.ID):    #  
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		elif(d2.ID > d1.ID and d2.ID > d0.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+	if(not d0.isTrump and d1.isTrump and d2.isTrump and d3.isTrump):  #  if d1 and d2 and d3 are trump
+		if(d0.ID > d1.ID and d0.ID > d2.ID):    #  
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		if(d1.ID > d0.ID and d1.ID > d2.ID):    #  
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		if(d2.ID > d1.ID and d2.ID > d0.ID):    #  
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
+
 	#  if 4 trump
 	if(d0.isTrump and d1.isTrump and d2.isTrump and d3.isTrump):    #  if all doms are trump compare by ID
 		if(d0.ID > d1.ID and d0.ID > d2.ID and d0.ID > d3.ID):      #  if d0 is greater than all return d0
@@ -165,7 +252,7 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 
 	#  if no trump and no double(TODO)
 	return winner, dWinner, points
-
+	#  if nothing matches lead domino
 
 
 
@@ -219,7 +306,6 @@ Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15,
 #default values
 Suit = 0
 Trump = 6
-i = 0  #used for loops DELETE this later
 Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  3/6  1/6  1/1  0/2  0/3
 Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  4/6
 Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
