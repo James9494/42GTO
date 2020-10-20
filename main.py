@@ -42,7 +42,7 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 
 
 	winner = 99  #  this will be set to which person one, 0 - 3
-	dWinner = Domino(False,False,0,0,0,0)  #  creating a domino that will be changed later
+	# dWinner = Domino(False,False,0,0,0,0)  #  creating a domino that will be changed later (FIXME Breaks the program)
 	leadSuit = 0
 	points = 0.0  # this will be changed soon to be the points per each trick and returned at end
 
@@ -185,7 +185,7 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 			dWinner = d3
 			return winner, dWinner
 	if(d0.isTrump and not d1.isTrump and d2.isTrump and d3.isTrump):  #  if d0 and d2 and d3 are trump
-		elif(d0.ID > d1.ID and d0.ID > d2.ID):    #  
+		if(d0.ID > d1.ID and d0.ID > d2.ID):    #  
 			winner = 0
 			dWinner = d0
 			return winner, dWinner
@@ -251,16 +251,34 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 			return winner, dWinner
 
 	#  if no trump and no double(TODO)
-	return winner, dWinner, points
+	
 	#  if nothing matches lead domino
+	if not d0.isTrump and not d1.isTrump and not d2.isTrump and not d3.isTrump:
+		if d0 == dLead:
+			winner = 0
+			dWinner = d0
+			return winner, dWinner
+		elif d1 == dLead:
+			winner = 1
+			dWinner = d1
+			return winner, dWinner
+		elif d2 == dLead:
+			winner = 2
+			dWinner = d2
+			return winner, dWinner
+		elif d3 == dLead:
+			winner = 3
+			dWinner = d3
+			return winner, dWinner
 
-
+	else:
+		print("Error in trickWinner Function")
 
 
 
 
 	# Return who one as an int(winner) and then what that domino was(dWinner) points is passed at end to show who wins.
-
+	#return winner, dWinner, points
 
 	# This function will take in 4 dominoes and a winning team and assign points correctly
 def points(a): #  TODO
@@ -338,7 +356,7 @@ print("Trump check done")
 # ****************************************************************************
 	
 #  maybe make a main() function TODO
-
+print(str(trickWinner(Player0[0], Player1[0], Player2[0], Player3[0], Player0[0], Trump)))
 
 
 
