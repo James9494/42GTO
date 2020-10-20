@@ -37,7 +37,7 @@ def createHand(suit, hand):
 	return tempArray
 	
 	#  This function will return the winning domino
-def handWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who is leading a DOM and the next 3 are the 3 ppl to their left in order
+def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who is leading a DOM and the next 3 are the 3 ppl to their left in order
 	#  Default values to be changed
 	winner = 99  #  this will be set to which person one, 0 - 3
 	dWinner = Domino(False,False,0,0,0,0)  #  creating a domino that will be changed later
@@ -141,8 +141,14 @@ def handWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who 
 		elif(d3.ID > d1.ID and d3.ID > d2.ID and d3.ID > d0.ID):    #  if d3 is greater than all return d0
 			winner = 3
 			dWinner = d3
-			return winner, dWinner	
+			return winner, dWinner
 	#  if no trump (TODO)
+	#  if no trump and lead is a double(TODO)
+
+	#  if no trump and not lead plays winning double(TODO)
+
+	#  if no trump and no double(TODO)
+	return winner, dWinner, points
 
 
 
@@ -150,10 +156,7 @@ def handWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who 
 
 
 
-
-	# Return who one as an int(winner) and then what that domino was(dWinner).
-
-
+	# Return who one as an int(winner) and then what that domino was(dWinner) points is passed at end to show who wins.
 
 
 	# This function will take in 4 dominoes and a winning team and assign points correctly
