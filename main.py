@@ -40,9 +40,12 @@ def createHand(suit, hand):
 def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who is leading a DOM and the next 3 are the 3 ppl to their left in order
 	#  Default values to be changed
 
-
+	dom0Val = 0
+	dom1Val = 0
+	dom2Val = 0
+	dom3Val = 0   # default values to be used if no trump present in hand
 	winner = 99  #  this will be set to which person one, 0 - 3
-	# dWinner = Domino(False,False,0,0,0,0)  #  creating a domino that will be changed later (FIXME Breaks the program)
+	# dWinner = Domino(False,False,0,0,0,0)  #  creating a domino that will be changed later (FIXME Breaks the program) (TODO)
 	leadSuit = 0
 	points = 0.0  # this will be changed soon to be the points per each trick and returned at end
 
@@ -54,14 +57,6 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 	points = d0.Points + d1.Points + d2.Points + d3.Points
 	
 	# set lead value
-	if(dLead.isTrump):
-		leadSuit = trump
-	else:
-		leadSuit = dLead.High
-
-
-
-
 	if(dLead.isTrump):        #  Check if lead Domino is a trump
 		leadSuit = trump      #  if trump set lead domino to the trump value
 	if(not dLead.isTrump):       #  Check if not trump
@@ -90,19 +85,19 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 		dWinner = d0
 		return winner, dWinner
 	elif(not d0.isTrump and d1.isTrump and not d2.isTrump and not d3.isTrump):   #  if d1 is the only trump it wins
-		winner = 0
-		dWinner = d0
+		winner = 1
+		dWinner = d1
 		return winner, dWinner
 	elif(not d0.isTrump and not d1.isTrump and d2.isTrump and not d3.isTrump):   #  if d2 is the only trump it wins
-		winner = 0
-		dWinner = d0
+		winner = 2
+		dWinner = d2
 		return winner, dWinner
 	elif(not d0.isTrump and not d1.isTrump and not d2.isTrump and d3.isTrump):   #  if d3 is the only trump it wins
-		winner = 0
-		dWinner = d0
+		winner = 3
+		dWinner = d3
 		return winner, dWinner
 	
-	#  if 2 trump (TODO)
+	#  if 2 trump
 	if(d0.isTrump and d1.isTrump and not d2.isTrump and not d3.isTrump):  #  if d0 and d1 doms are trump compare by ID
 		if(d0.ID > d1.ID):    #  
 			winner = 0
@@ -229,9 +224,11 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 			winner = 3
 			dWinner = d3
 			return winner, dWinner
-	#  if no trump (TODO)
-	if not d0.isTrump and not d1.isTrump and not d2.isTrump and not d3.isTrump:
+	#  if no trump
+	
+	if not d0.isTrump and not d1.isTrump and not d2.isTrump and not d3.isTrump:   #  if no trump
 		
+
 	#  if no trump and anyone plays a double matching suit
 		if d0.isDouble and d0.High == leadSuit:
 			winner = 0
@@ -250,26 +247,51 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 			dWinner = d3
 			return winner, dWinner
 
-	#  if no trump and no double(TODO)
-	
-	#  if nothing matches lead domino
-	if not d0.isTrump and not d1.isTrump and not d2.isTrump and not d3.isTrump:
-		if d0 == dLead:
+	#  if no trump and no double and no 
+	if(d0.High == leadSuit):      #  if d0 high = lead then set d0 low as val
+			dom0Val = d0.Low
+		elif(d0.Low == leadSuit):	  #  if d0 low = lead then set d0 high as val
+			dom0Val = d0.High
+		else:                         #  if not lead suit then set 0
+			dom0Val = 0
+
+		if(d1.High == leadSuit):      #  if d0 high = lead then set d0 low as val
+			dom1Val = d1.Low
+		elif(d1.Low == leadSuit):     #  if d0 low = lead then set d0 high as val
+			dom1Val = d1.High
+		else:                         #  if not lead suit then set 0
+			dom1Val = 0 
+
+		if(d2.High == leadSuit):     #  if d0 high = lead then set d0 low as val
+			dom2Val = d2.Low
+		elif(d0.Low == leadSuit):    #  if d0 low = lead then set d0 high as val
+			dom2Val = d2.High 
+		else:                        #  if not lead suit then set 0
+			dom2Val = 0
+
+		if(d3.High == leadSuit):     #  if d0 high = lead then set d0 low as val
+			dom3Val = d3.Low
+		elif(d3.Low == leadSuit):    #  if d0 low = lead then set d0 high as val
+			dom3Val = d3.High
+		else:                        #  if not lead suit then set 0
+			dom3Val = 0
+		if(dom0Val > dom1Val and dom0Val > dom2Val and dom0Val > dom3Val):
 			winner = 0
-			dWinner = d0
-			return winner, dWinner
-		elif d1 == dLead:
+			dwinner = d0
+			return winner, dwinner
+		elif(dom1Val > dom2Val and dom1Val > dom3Val):
 			winner = 1
-			dWinner = d1
-			return winner, dWinner
-		elif d2 == dLead:
+			dwinner = d1
+			return winner, dwinner
+		elif(dom2Val > dom3Val):
 			winner = 2
-			dWinner = d2
-			return winner, dWinner
-		elif d3 == dLead:
+			dwinner = d2
+			return winner, dwinner
+		else:
 			winner = 3
-			dWinner = d3
-			return winner, dWinner
+			dwinner = d3
+			return winner, dwinner
+
 
 	else:
 		print("Error in trickWinner Function")
@@ -279,11 +301,6 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 
 	# Return who one as an int(winner) and then what that domino was(dWinner) points is passed at end to show who wins.
 	#return winner, dWinner, points
-
-	# This function will take in 4 dominoes and a winning team and assign points correctly
-def points(a): #  TODO
-	a = 3
-	return a
 
 
 
@@ -324,7 +341,7 @@ Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15,
 #default values
 Suit = 0
 Trump = 6
-Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  3/6  1/6  1/1  0/2  0/3
+Player0 = [D27, D26, D21, D12, D7, D2, D3]       #6/6  6/5  6/3  6/1  1/1  0/2  0/3
 Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  4/6
 Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
 Player3 = [D4, D5, D9, D13, D16, D17, D19]       #0/4  0/5  1/3  2/5  2/2  2/6  3/4
@@ -355,6 +372,17 @@ print("Trump check done")
 # *                                                                          *
 # ****************************************************************************
 	
+
+
+
+
+
+
+
+
+
+
+
 #  maybe make a main() function TODO
 print(str(trickWinner(Player0[0], Player1[0], Player2[0], Player3[0], Player0[0], Trump)))
 
