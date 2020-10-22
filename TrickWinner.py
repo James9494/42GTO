@@ -211,7 +211,7 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 			dWinner = d3
 			return winner, dWinner, points
 
-	#  if no trump and no double and no 
+	#  if no trump and no double
 		if(d0.High == leadSuit):          #  if d0 high = lead then set d0 low as val
 			dom0Val = d0.Low
 		elif(d0.Low == leadSuit):     #  if d0 low = lead then set d0 high as val
@@ -259,3 +259,5 @@ def trickWinner(d0, d1, d2, d3, dLead, trump):  #  dLead is the first person who
 
 	else:
 		print("Error in trickWinner Function")
+
+# for i in range(len(array)):
