@@ -1,8 +1,5 @@
 
-
 from TrickWinner import trickWinner
-
-
 
 
 class Domino():
@@ -23,6 +20,7 @@ class Domino():
 				self.isTrump = True
 			else :
 				self.isTrump = False
+
 				
 def createHand(suit, hand):
 	amountOf = 0
@@ -40,21 +38,7 @@ def createHand(suit, hand):
 			if hand[i].High == suit or hand[i].Low == suit:
 				tempArray[temp] = hand[i]
 				temp +=1
-#	print(str(len(tempArray)))
 	return tempArray
-	
-
-
-
-
-
-
-	# Return who one as an int(winner) and then what that domino was(dWinner) points is passed at end to show who wins.
-	#return winner, dWinner, points, points
-
-
-
-
 	
 	
 # Creating Dominos for use later
@@ -86,8 +70,10 @@ D24 = Domino(False, False, 6, 4, 24, 10.25)
 D25 = Domino(False, True, 5, 5, 25, 10.25)
 D26 = Domino(False, False, 6, 5, 26, .25)
 D27 = Domino(False, True, 6, 6, 27, .25)
+
 # Domino array for manipulation
 Dominos = [D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27]
+
 #default values
 Suit = 0
 Trump = 6
@@ -96,12 +82,12 @@ Player1 = [D25, D22, D15, D10, D11, D6, D24]     #5/5  4/4  2/4  1/4  1/5  0/6  
 Player2 = [D23, D20, D0, D1, D8, D18, D14]       #4/5  3/5  0/0  0/1  1/2  3/3  2/3
 Player3 = [D4, D5, D9, D13, D16, D17, D19]       #0/4  0/5  1/3  2/5  2/2  2/6  3/4
 Player = [Player0, Player1, Player2, Player3]
+
 # Default Score for each player
 P0 = 0.0
 P1 = 0.0
 P2 = 0.0
 P3 = 0.0
-
 
 #Player Scores Array
 PS = [P0, P1, P2, P3]
@@ -121,16 +107,6 @@ print("Trump check done")
 # *                                 MAIN                                     *
 # *                                                                          *
 # ****************************************************************************
-	
-
-
-
-
-
-
-
-
-
 
 
 #  maybe make a main() function TODO
@@ -154,9 +130,5 @@ if (intWinner == 3):
 
 
 
-
-
-
 #print out all scores
 print(str(PS[0]) + " " + str(PS[1]) + " " + str(PS[2]) + " " + str(PS[3]))
-
