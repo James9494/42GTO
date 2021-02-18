@@ -17,19 +17,19 @@ class Domino():
 	def printDom(self):
 		print("[" + str(self.High) + "/" + str(self.Low) + "]")
 	def trumpCheck(self, Trump):
-			if self.High == Trump:
+			if self.High == Trump:  # if High side is a trump
 				self.isTrump = True
-			elif self.Low == Trump:
+			elif self.Low == Trump:  # if Low side is a trump
 				self.isTrump = True
 			else :
-				self.isTrump = False
+				self.isTrump = False  # else set false
 				
 def createHand(suit, hand):
 	amountOf = 0
 	temp = 0
-	for i in range(len(hand)):
-		if hand[i].High == suit or hand[i].Low == suit:
-			amountOf += 1
+	for i in range(len(hand)):  #  iterate through length of hand
+		if hand[i].High == suit or hand[i].Low == suit:  #  if the high side or low side is equal to the lead suit
+			amountOf += 1  #  temp value for the amount of dominoes in the hand to be created
 	if amountOf == 0:
 		tempArray = [D0] * len(hand)
 		for i in range(len(hand)):
