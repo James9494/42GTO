@@ -1,6 +1,4 @@
 import csv
-import pandas as pd
-import numpy as np
 #create any function here you want to send while not messing with main.py
 
 #HandCreation Function     *** Based on the lead domino
@@ -53,7 +51,12 @@ Date 10/13/20
 
 ************************************************************************************************************************
 """
-cities = ["Austin","Grand Saline"]
-print(cities)
-#city = pd.DataFrame(cities, columns=['City','State'])
-#city.to_csv('test.csv',index=False)
+
+
+TestArray = [[1, 2, 3, 4, 1],
+			 [1, 2, 3, 4, 4]
+			 [1, 2, 3, 4, 2]]
+with open('test.csv', 'w', newline = '') as file:
+	write = csv.writer(file)
+	write.writerow(["Test 1", "Test 2", "Test 3"])
+	write.writerows(TestArray)
